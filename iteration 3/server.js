@@ -52,6 +52,9 @@ const iteration3Path = path.join(__dirname, 'dist');
 const iteration3ImagesPath = path.join(__dirname, 'images');
 app.use('/iteration3', express.static(iteration3Path));
 app.use('/iteration3/images', express.static(iteration3ImagesPath));
+// 统一根级图片路径，兼容代码里使用的 /images/ 引用
+app.use('/images', express.static(iteration3ImagesPath));
+app.use('/images', express.static(iteration2ImagesPath));
 app.get('/iteration3', (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });
