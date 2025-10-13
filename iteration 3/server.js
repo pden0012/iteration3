@@ -96,7 +96,10 @@ const municipalCandidates = [
   path.join(iteration2Path, 'municipal-boundary.csv'),
   path.join(iteration2Path, 'municipal_boundary.csv'),
   path.join(__dirname, 'municipal-boundary.csv'),
-  path.join(__dirname, 'municipal_boundary.csv')
+  path.join(__dirname, 'municipal_boundary.csv'),
+  // repository root (parent directory of iteration 3)
+  path.join(__dirname, '..', 'municipal-boundary.csv'),
+  path.join(__dirname, '..', 'municipal_boundary.csv')
 ];
 app.get(['/municipal-boundary.csv', '/municipal_boundary.csv'], (req, res) => {
   for (const candidate of municipalCandidates) {
