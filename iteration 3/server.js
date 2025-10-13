@@ -80,9 +80,9 @@ app.get(/^\/iteration1\/.*/, (req, res) => {
   res.sendFile(path.join(iteration1Path, 'index.html'));
 });
 
-// 根路径 - 可以重定向到默认的 iteration
+// 根路径 - 直接返回 iteration3 的首页，但不改变地址栏
 app.get('/', (req, res) => {
-  res.redirect('/iteration3');  // 或者显示一个选择页面
+  res.sendFile(path.join(iteration3Path, 'index.html'));
 });
 
 // 健康检查

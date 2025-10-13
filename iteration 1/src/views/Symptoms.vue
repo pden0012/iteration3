@@ -89,23 +89,22 @@ export default {
   },
 
   computed: {
-    // this computed returns how many symptoms are checked
-    // returns: number - count of selected checklist items
+    // Tiny helper: count how many boxes are ticked.
+    // returns: number — helps us decide which advice bucket to show
     checkedCount() {
       return this.symptoms.filter(symptom => symptom.checked).length;
     }
   },
 
   methods: {
-    // this method handles the back button click to return to resources page
-    // returns: nothing, but navigates back to resources view
+    // Back button: ask parent to switch tabs instead of routing here.
     goBackToResources() {
       // tell parent component to switch back to resources tab
       this.$parent.setActiveItem('resources');
     },
 
-    // this method updates the advice text based on number of checks
-    // returns: nothing, but fills the advice box with tailored help
+    // Update advice copy based on how many items are checked.
+    // 0 → hide box (handled in template), 1-3 mild, 4-6 moderate, 7+ severe.
     updateAdvice() {
       const count = this.checkedCount;
       if (count <= 3) {
@@ -119,7 +118,7 @@ export default {
   },
 
   mounted() {
-    // reset advice on first load so box is hidden
+    // Reset advice on first load so the right panel stays hidden at start.
     this.advice = '';
   }
 }

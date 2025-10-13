@@ -68,6 +68,8 @@ export default {
   data() {
     return {
       // hero section data
+      // quick note (student style): this is the big banner up top.
+      // keep strings here so copy changes don't touch the template.
       heroData: {
         title: 'Beat hay fever before it beats you',
         subtitle: 'Your partner in managing allergies daily',
@@ -75,6 +77,8 @@ export default {
       },
       featuresTitle: 'All the Tools You Need to Stay Ahead',
       // all the feature cards data
+      // tip: each card has a tiny id so we can route or emit based on it
+      // iconText is just the image path; keeps the template clean
       features: [
         {
           id: 'tracker',
@@ -120,6 +124,8 @@ export default {
         }
       ],
       // info section data
+      // this text block sits in the middle part of the page
+      // keeping it centralized makes future localization easier
       infoData: {
         title: 'Take Control of Your Hay Fever',
         description: 'Our resources provide the information and tools you need to effectively manage hay fever and maintain your quality of life.'
@@ -127,34 +133,29 @@ export default {
     }
   },
   methods: {
-    // this method handles the "Get Started" button click (not currently used)
-    // it logs the click and emits an event to parent component
-    // returns: nothing, but emits get-started-clicked event
+    // not used right now, but nice to have for future onboarding button
+    // returns: nothing; just bubbles an event upward so parent owns navigation
     handleGetStarted() {
       console.log('Get Started button clicked');
       this.$emit('get-started-clicked');
     },
     
-    // this method handles the hero section "Check Today's Pollen" button click
-    // it navigates to the dashboard/tracker feature
-    // returns: nothing, but emits feature-button-clicked event with 'tracker'
+    // main CTA: user clicks the yellow button → we go to the tracker
+    // I don’t import the router here; emitting keeps this component dumb and reusable
     goDashboard() {
       this.$emit('feature-button-clicked', 'tracker');
     },
     
-    // this method handles when user clicks on a feature card (not the button)
-    // it logs the click and emits an event to parent component
-    // parameters: featureId - the ID of the clicked feature card
-    // returns: nothing, but emits feature-clicked event
+    // when the whole card (not the tiny button) is clicked
+    // params: featureId — just a short id like 'map' or 'support'
+    // side effect: helpful console log for quick QA
     handleFeatureClick(featureId) {
       console.log('Feature card clicked:', featureId);
       this.$emit('feature-clicked', featureId);
     },
     
-    // this method handles when user clicks on a feature card's button
-    // it logs the click and emits an event to parent component for navigation
-    // parameters: featureId - the ID of the clicked feature button
-    // returns: nothing, but emits feature-button-clicked event
+    // small button inside each card. I keep a separate handler so later
+    // we can track clicks on the button vs the card body if we want.
     handleButtonClick(featureId) {
       console.log('Feature button clicked:', featureId);
       this.$emit('feature-button-clicked', featureId);
