@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -86,6 +87,24 @@ app.get(/^\/iteration1\/.*/, (req, res) => {
 // 根路径 - 直接返回 iteration3 的首页，但不改变地址栏
 app.get('/', (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
+});
+
+// Municipal boundary CSV - support both hyphen and underscore filenames and multiple locations
+const municipalCandidates = [
+  path.join(iteration3Path, 'municipal-boundary.csv'),
+  path.join(iteration3Path, 'municipal_boundary.csv'),
+  path.join(iteration2Path, 'municipal-boundary.csv'),
+  path.join(iteration2Path, 'municipal_boundary.csv'),
+  path.join(__dirname, 'municipal-boundary.csv'),
+  path.join(__dirname, 'municipal_boundary.csv')
+];
+app.get(['/municipal-boundary.csv', '/municipal_boundary.csv'], (req, res) => {
+  for (const candidate of municipalCandidates) {
+    if (fs.existsSync(candidate)) {
+      return res.sendFile(candidate);
+    }
+  }
+  res.status(404).send('municipal boundary csv not found');
 });
 
 // 健康检查
