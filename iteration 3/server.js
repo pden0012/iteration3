@@ -58,10 +58,13 @@ app.get(/^\/iteration2\/.*/, (req, res) => {
 // Iteration 3 静态文件和路由（当前目录）
 const iteration3Path = path.join(__dirname, 'dist');
 const iteration3ImagesPath = path.join(__dirname, 'images');
+const iteration3NestedImagesPath = path.join(iteration3ImagesPath, 'iteration 3 images');
 app.use('/iteration3', express.static(iteration3Path));
 app.use('/iteration3/images', express.static(iteration3ImagesPath));
 // 统一根级图片路径，兼容代码里使用的 /images/ 引用
 app.use('/images', express.static(iteration3ImagesPath));
+// 兼容 PlayGame 等使用的 /images/Game Plants/...、/images/GIF/... 等路径
+app.use('/images', express.static(iteration3NestedImagesPath));
 app.use('/images', express.static(iteration2ImagesPath));
 app.get('/iteration3', (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
