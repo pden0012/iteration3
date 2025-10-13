@@ -94,9 +94,22 @@ export default {
   name: 'PlayGame',
   data() {
     return {
+      // gameState: I only have two screens, so a tiny state machine is enough
+      // 'welcome' → the intro with Alex and Start button
+      // 'playing' → the drag & drop garden
       gameState: 'welcome', // 'welcome' or 'playing'
+
+      // which plant is currently dropped in the garden area
       selectedPlant: null,
+      // info card shows up with a small delay so it feels animated
       showInfo: false,
+
+      // plant catalog: each record is the minimal info I need to drive UI
+      // - id: local key for DnD
+      // - name: label shown under the icon
+      // - image: path to the icon
+      // - isSafe: the “game rule” for happy/sad
+      // - description: friendly text in the info card
       plants: [
         {
           id: 1,
@@ -172,6 +185,8 @@ export default {
     }
   },
   computed: {
+    // What Alex should look like right now.
+    // Super simple rule: safe plant → happy, unsafe → sad, none → waving.
     alexState() {
       if (!this.selectedPlant) {
         return '/images/GIF/Alex waving.gif';
@@ -180,6 +195,8 @@ export default {
         ? '/images/GIF/Alex happy.gif' 
         : '/images/GIF/Alex sad.gif';
     },
+    // The tiny text bubble under Alex. I keep it here so UI auto-updates
+    // whenever selectedPlant changes.
     feedbackText() {
       if (!this.selectedPlant) {
         return 'Drag a plant into the center, then learn if it\'s hay fever safe or not!';
@@ -190,14 +207,25 @@ export default {
     }
   },
   methods: {
+    // Start button on the welcome card → move into the game view.
     startGame() {
       this.gameState = 'playing';
     },
+    // When dragging starts, I stash the plant id on the drag event.
+    // params:
+    //  - event: native dragstart event from the draggable item
+    //  - plant: the plant record we’re dragging
+    // side effects: writes a small payload onto dataTransfer so onDrop can read it
     onDragStart(event, plant) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
       event.dataTransfer.setData('plantId', plant.id);
     },
+    // Drop handler: pick the plant by id, reset the info card, then
+    // pop the info card after a small delay so it feels animated.
+    // params:
+    //  - event: native drop event
+    // UX note: I hide the info card first so the slide-up animation is obvious.
     onDrop(event) {
       event.preventDefault();
       const plantId = parseInt(event.dataTransfer.getData('plantId'));
@@ -209,10 +237,14 @@ export default {
         this.showInfo = true;
       }, 300);
     },
+    // Quick reset: clear selection and hide the info card.
+    // returns: nothing; simply puts the game back into a neutral state
     resetGame() {
       this.selectedPlant = null;
       this.showInfo = false;
     },
+    // Go back to the welcome screen (used if we add a Back button later).
+    // I also clear selection so the CTA text resets properly.
     backToWelcome() {
       this.gameState = 'welcome';
       this.selectedPlant = null;

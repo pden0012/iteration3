@@ -224,9 +224,11 @@ export default {
     },
 
   methods: {
-    // this method opens a resource by id and routes to proper detail view
-    // parameters: resourceId - the ID from resources list
-    // returns: nothing, but toggles either video/article detail or emits navigation
+    // Open a resource card by id. I keep the rules very simple:
+    // - video → show the iframe view
+    // - article → show the article view
+    // - checklist (id=2) → ask parent to switch to Symptoms
+    // returns: nothing, just flips some flags or emits an event
     openResource(resourceId) {
       console.log('Opening resource:', resourceId);
       
@@ -260,9 +262,8 @@ export default {
 
 
 
-    // this method handles the back button click from detail views
-    // it resets all detail view states and returns to main resources list
-    // returns: nothing, but updates component state to show main view
+    // Back button for detail pages: I reset state to show the main list again.
+    // super lightweight so navigation feels instant.
     goBackToResources() {
       // hide video detail view
       this.showVideoDetail = false;
@@ -272,9 +273,8 @@ export default {
       this.currentArticle = null;
     },
 
-    // this method handles the "Back to Dashboard" button click in knowledge section
-    // it navigates back to the main dashboard page
-    // returns: nothing, but emits navigation event to parent component
+    // CTA in the knowledge section – send user back to the dashboard tab.
+    // I emit an event so the parent decides how to switch views.
     learnMore() {
       // tell parent component to switch to dashboard tab
       this.$parent.setActiveItem('dashboard');

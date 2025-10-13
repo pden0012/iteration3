@@ -70,6 +70,16 @@ app.get(/^\/iteration3\/.*/, (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });
 
+// Iteration 1 静态文件和路由（位于上级目录）
+const iteration1Path = path.join(__dirname, '..', 'iteration 1', 'dist');
+app.use('/iteration1', express.static(iteration1Path));
+app.get('/iteration1', (req, res) => {
+  res.sendFile(path.join(iteration1Path, 'index.html'));
+});
+app.get(/^\/iteration1\/.*/, (req, res) => {
+  res.sendFile(path.join(iteration1Path, 'index.html'));
+});
+
 // 根路径 - 可以重定向到默认的 iteration
 app.get('/', (req, res) => {
   res.redirect('/iteration3');  // 或者显示一个选择页面

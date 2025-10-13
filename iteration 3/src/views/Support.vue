@@ -107,27 +107,35 @@ export default {
   name: 'Support',
   data() {
     return {
+      // free text typed by the user. When it changes, I debounce a lookup.
       locationSearch: '',
       activeFilter: 'all',
+      // very light chip model. In future we could make the ids match backend enums
       filters: [
         { id: 'all', label: 'All' },
         { id: 'hospital', label: 'Hospitals' },
         { id: 'gp', label: 'GP Clinics' }
       ],
+      // results shown to the user
       locations: [],
+      // default to Melbourne CBD so first paint isn’t empty
       userLatitude: -37.8136,
       userLongitude: 144.9631,
       loading: false,
       error: null,
       gettingLocation: false,
       searching: false,
+      // suggestions from Nominatim live here; cleared on select or escape
       locationSuggestions: [],
       showSuggestions: false,
+      // tiny debounce handle
       searchTimeout: null,
       hasValidLocation: false
     }
   },
   computed: {
+    // For now we keep filtering super basic.
+    // Later we can actually filter by type here instead of server-side.
     filteredLocations() {
       return this.locations;
     }
@@ -141,6 +149,7 @@ export default {
     document.removeEventListener('click', this.handleClickOutside);
   },
   methods: {
+    // Try to grab the user's coordinates. If it fails, fall back to CBD.
     getUserLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -151,18 +160,19 @@ export default {
             this.fetchFacilities();
           },
           (error) => {
-            console.log('使用默认位置（墨尔本CBD）:', error);
-            // 使用默认位置
+            console.log('Using default location (Melbourne CBD):', error);
+            // use default location
             this.hasValidLocation = true;
             this.fetchFacilities();
           }
         );
       } else {
-        console.log('浏览器不支持地理定位，使用默认位置');
+        console.log('Geolocation not supported, using default location');
         this.hasValidLocation = true;
         this.fetchFacilities();
       }
     },
+    // Debounced search to the Nominatim API for address text input.
     async handleLocationSearch() {
       // 用户输入时，标记为无效位置
       this.hasValidLocation = false;
@@ -195,11 +205,12 @@ export default {
           this.locationSuggestions = results;
           this.showSuggestions = true;
         } catch (error) {
-          console.error('地址搜索失败:', error);
+          console.error('Address search failed:', error);
           this.locationSuggestions = [];
         }
       }, 300); // 300ms防抖延迟
     },
+    // User clicks one of the suggestions → lock coordinates + close list
     selectLocation(suggestion) {
       this.userLatitude = parseFloat(suggestion.lat);
       this.userLongitude = parseFloat(suggestion.lon);
@@ -208,6 +219,7 @@ export default {
       this.locationSuggestions = [];
       this.hasValidLocation = true;
     },
+    // Explicit search button: if no valid pick, send empty coords to backend.
     async searchLocation() {
       if (!this.locationSearch.trim()) {
         alert('Please enter a location or address');
@@ -223,6 +235,7 @@ export default {
       // 直接调用API，让后端处理
       this.fetchFacilities();
     },
+    // Shortcut: ask the browser for current position and search immediately.
     getCurrentLocation() {
       this.gettingLocation = true;
       
@@ -248,6 +261,7 @@ export default {
         this.gettingLocation = false;
       }
     },
+    // Tiny UX: click outside the wrapper to close suggestions.
     handleClickOutside(event) {
       // 检查点击是否在搜索框外部
       const searchWrapper = event.target.closest('.service-search-wrapper');
@@ -255,6 +269,7 @@ export default {
         this.showSuggestions = false;
       }
     },
+    // Core fetch: call our backend with coords + filter, then map to UI items.
     async fetchFacilities() {
       this.loading = true;
       this.error = null;
@@ -280,22 +295,24 @@ export default {
             type: item.type
           }));
         } else {
-          this.error = result.msg || '获取数据失败';
+          this.error = result.msg || 'Failed to fetch data';
           this.locations = [];
         }
       } catch (error) {
-        console.error('获取附近设施失败:', error);
-        this.error = '网络错误，请稍后重试';
+        console.error('Failed to fetch nearby facilities:', error);
+        this.error = 'Network error, please try again later';
         this.locations = [];
       } finally {
         this.loading = false;
       }
     },
+    // Change active filter and refresh results.
     setFilter(filterId) {
       this.activeFilter = filterId;
       // 切换过滤器时重新获取数据
       this.fetchFacilities();
     },
+    // Open Google Maps in a new tab with the address.
     navigate(location) {
       // 导航到地图或外部导航应用
       const address = encodeURIComponent(`${location.address}, Melbourne, Australia`);
