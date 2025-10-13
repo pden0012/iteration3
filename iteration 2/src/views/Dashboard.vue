@@ -157,10 +157,6 @@
 
     </div>
 
-    <!-- Blue separator bar -->
-    <!-- blue separator bar -->
-    <div class="separator-bar"></div>
-
     <!-- Tips Section - Quick tips and advice -->
     <!-- tips section - quick tips and advice -->
     <section class="tips-section">
@@ -190,9 +186,6 @@
 
 <script>
 
-
-import scatterJson from '../../Iteration 1 Data/melbourne_scatter_points.json';
-import seasonalJson from '../../Iteration 1 Data/melbourne_seasonal_contributions.json';
 export default {
   name: 'Dashboard',
   data() {
@@ -272,11 +265,7 @@ export default {
       alertVariant: 'normal', // alert style normal(yellow) / danger(red)
       pollenProgress: 25, 
       chartRingColor: '#C8E6C9', 
-      chartTextColor: '#1E1E1E'  
-      ,
-      
-      scatterViz: null,   
-      stackedViz: null    
+      chartTextColor: '#1E1E1E'
     }
   },
   
@@ -321,155 +310,6 @@ export default {
       } catch (e) {
         console.error('Failed to load addresses CSV', e);
       }
-    },
-
-    
-    // this method initializes the climate visualization charts
-    // it loads scatter plot and stacked bar chart data from JSON files
-    // returns: nothing, but updates scatterViz and stackedViz data
-    // this method initializes local climate charts (scatter + stacked)
-    initClimateViz() {
-      try {
-        // build scatter plot visualization from JSON data
-        this.scatterViz = this.buildScatterViz(scatterJson);
-      } catch (e) {
-        console.error('Failed to init scatter viz', e);
-      }
-      try {
-        // build stacked bar chart visualization from JSON data
-        this.stackedViz = this.buildStackedViz(seasonalJson);
-      } catch (e) {
-        console.error('Failed to init stacked viz', e);
-      }
-    },
-
-    
-    
-    // this method builds scatter plot visualization data from JSON
-    // it calculates scales, positions points, and sets up median lines
-    // parameters: json - the scatter plot data from JSON file
-    // returns: object - visualization configuration with points and scales
-    // this method builds the data model for the scatter visualization
-    // params: json - data file with points & medians
-    // returns: object used by template <svg>
-    buildScatterViz(json) {
-      // set chart dimensions
-      const width = 560;    
-      const height = 380;   
-      const padLeft = 56; // left padding for y-axis
-      const padRight = 16; // right padding
-      const padTop = 18; // top padding
-      const padBottom = 46; // bottom padding for x-axis
-      const plotW = width - padLeft - padRight; // plot area width
-      const plotH = height - padTop - padBottom; // plot area height
-      
-      // extract data points from JSON
-      const points = Array.isArray(json?.points) ? json.points : [];
-      const rainVals = points.map(p => p.rain_mm); // rainfall values
-      const windVals = points.map(p => p.wind_kmh); // wind speed values
-      
-      // calculate data ranges for scaling
-      const minRain = Math.min(...rainVals);
-      const maxRain = Math.max(...rainVals);
-      const minWind = Math.min(...windVals);
-      const maxWind = Math.max(...windVals);
-      
-      // create scaling functions to map data to pixel coordinates
-      const xScale = (v) => padLeft + ((v - minRain) / (maxRain - minRain)) * plotW;
-      const yScale = (v) => padTop + (1 - (v - minWind) / (maxWind - minWind)) * plotH;
-      
-      // map all points to pixel coordinates
-      const mapped = points.map(p => ({
-        ...p,
-        x: xScale(p.rain_mm), // x position based on rainfall
-        y: yScale(p.wind_kmh) // y position based on wind speed
-      }));
-      
-      // calculate median positions for reference lines
-      const rainMed = Number(json?.medians?.rain_median ?? (minRain + maxRain) / 2);
-      const windMed = Number(json?.medians?.wind_median ?? (minWind + maxWind) / 2);
-      
-      // return complete visualization configuration
-      return {
-        width, height, padLeft, padTop, plotW, plotH,
-        points: mapped,
-        medianX: xScale(rainMed), // median line x position
-        medianY: yScale(windMed) // median line y position
-      };
-    },
-
-    
-    
-    // this method builds stacked bar chart visualization data from JSON
-    // it creates bars for each season with stacked segments for different factors
-    // parameters: json - the seasonal data from JSON file
-    // returns: object - visualization configuration with bars and legend
-    // this method builds the model for seasonal stacked bar chart
-    // params: json - seasonal contribution dataset
-    // returns: object with bars and legend arrays
-    buildStackedViz(json) {
-      // set chart dimensions
-      const width = 560;
-      const height = 340;
-      const padLeft = 56; // left padding for y-axis
-      const padRight = 16; // right padding
-      const padTop = 28; // top padding
-      const padBottom = 40; // bottom padding for x-axis
-      const plotW = width - padLeft - padRight; // plot area width
-      const plotH = height - padTop - padBottom; // plot area height
-      
-      // extract data from JSON
-      const data = Array.isArray(json?.data) ? json.data : [];
-      const barGap = 22; // space between bars
-      const barWidth = (plotW - barGap * (data.length - 1)) / Math.max(data.length, 1);
-      
-      // define colors for different factors
-      const colors = {
-        wind: '#4A9EFF',         // blue for wind
-        dryDays: '#F2A737',      // orange for dry days
-        dryAir: '#82D9B4'        // green for dry air
-      };
-      
-      // create bars for each season
-      const bars = data.map((row, i) => {
-        const x = padLeft + i * (barWidth + barGap); // bar x position
-        
-        // extract contribution values for each factor
-        const vWind = Number(row.contrib_wind || 0);
-        const vDryDays = Number(row.contrib_dry_days || 0);
-        const vDryAir = Number(row.contrib_dry_air || 0);
-        
-        // calculate heights for each segment
-        const hWind = vWind * plotH;
-        const hDryDays = vDryDays * plotH;
-        const hDryAir = vDryAir * plotH;
-        
-        // calculate y positions for stacking segments
-        const yWind = padTop + plotH - hWind; // bottom segment
-        const yDryDays = yWind - hDryDays; // middle segment
-        const yDryAir = yDryDays - hDryAir; // top segment
-        
-        return {
-          season: row.season,
-          shortLabel: (row.season || '').split(' ')[0], // first word of season name
-          x,
-          width: barWidth,
-          segments: [
-            { key: 'wind', y: yWind, h: hWind, color: colors.wind },
-            { key: 'dryDays', y: yDryDays, h: hDryDays, color: colors.dryDays },
-            { key: 'dryAir', y: yDryAir, h: hDryAir, color: colors.dryAir }
-          ]
-        };
-      });
-      
-      // create legend configuration
-      const legend = [
-        { key: 'wind', label: 'Wind (dispersion)', color: colors.wind },
-        { key: 'dryDays', label: 'Dry days (less rain)', color: colors.dryDays },
-        { key: 'dryAir', label: 'Dry air (lower 3pm humidity)', color: colors.dryAir }
-      ];
-      
-      return { width, height, padLeft, padTop, plotW, plotH, bars, legend };
     },
 
     // this method handles when user types in the location search input
@@ -771,9 +611,6 @@ export default {
     
     this.chartRingColor = this.colorForOverall(this.pollenData.level);
     this.chartTextColor = this.textColorForOverall(this.pollenData.level);
-      
-      // charts removed per request; keep init disabled
-      // this.initClimateViz();
   }
 }
 </script>
