@@ -1,0 +1,19 @@
+{
+  "name": "hay-fever-multi-iteration",
+  "version": "1.0.0",
+  "description": "Hay Fever Management - Multi-Iteration Deployment",
+  "main": "deployment-server.js",
+  "scripts": {
+    "start": "node deployment-server.js",
+    "build": "echo 'Build completed'",
+    "dev": "node deployment-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^2.0.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
