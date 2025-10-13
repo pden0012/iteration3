@@ -1,0 +1,19 @@
+# Render deployment configuration for Multi-Iteration
+# Render多版本部署配置
+
+services:
+  - type: web
+    name: hay-fever-multi-iteration
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: BACKEND_URL
+        value: http://15.134.34.242:8080
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: free
