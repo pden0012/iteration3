@@ -35,11 +35,19 @@ app.use('/api', createProxyMiddleware({
   }
 }));
 
-// Iteration 2 静态文件和路由（位于当前目录的子目录）
-const iteration2Path = path.join(__dirname, 'iteration 2', 'dist');
-const iteration2ImagesPath = path.join(__dirname, 'iteration 2', 'images copy');
+// Iteration 2 静态文件和路由（位于上级目录）
+const iteration2Path = path.join(__dirname, '..', 'iteration 2', 'dist');
+const iteration2ImagesPath = path.join(__dirname, '..', 'iteration 2', 'images copy');
 app.use('/iteration2', express.static(iteration2Path));
 app.use('/iteration2/images', express.static(iteration2ImagesPath));
+// 兼容误输入的 "/iteration 2" 或编码形式，统一重定向到标准路径
+app.use((req, res, next) => {
+  if (req.path.startsWith('/iteration 2') || req.path.startsWith('/iteration%202')) {
+    const normalized = req.originalUrl.replace(/iteration%202|iteration 2/g, 'iteration2');
+    return res.redirect(301, normalized);
+  }
+  next();
+});
 app.get('/iteration2', (req, res) => {
   res.sendFile(path.join(iteration2Path, 'index.html'));
 });
