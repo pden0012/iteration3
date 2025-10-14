@@ -1,4 +1,4 @@
-// 部署服务器 - 用于 hayfree.space
+// Deployment server for hayfree.space
 const express = require('express');
 const cors = require('cors');
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -36,12 +36,12 @@ app.use('/api', createProxyMiddleware({
   }
 }));
 
-// Iteration 2 静态文件和路由（位于上级目录）
+// Iteration 2 static files and routes (located in parent directory)
 const iteration2Path = path.join(__dirname, '..', 'iteration 2', 'dist');
 const iteration2ImagesPath = path.join(__dirname, '..', 'iteration 2', 'images copy');
 app.use('/iteration2', express.static(iteration2Path));
 app.use('/iteration2/images', express.static(iteration2ImagesPath));
-// 兼容误输入的 "/iteration 2" 或编码形式，统一重定向到标准路径
+// Handle typos like "/iteration 2" or encoded forms, redirect to standard path
 app.use((req, res, next) => {
   if (req.path.startsWith('/iteration 2') || req.path.startsWith('/iteration%202')) {
     const normalized = req.originalUrl.replace(/iteration%202|iteration 2/g, 'iteration2');
@@ -56,15 +56,15 @@ app.get(/^\/iteration2\/.*/, (req, res) => {
   res.sendFile(path.join(iteration2Path, 'index.html'));
 });
 
-// Iteration 3 静态文件和路由（当前目录）
+// Iteration 3 static files and routes (current directory)
 const iteration3Path = path.join(__dirname, 'dist');
 const iteration3ImagesPath = path.join(__dirname, 'images');
 const iteration3NestedImagesPath = path.join(iteration3ImagesPath, 'iteration 3 images');
 app.use('/iteration3', express.static(iteration3Path));
 app.use('/iteration3/images', express.static(iteration3ImagesPath));
-// 统一根级图片路径，兼容代码里使用的 /images/ 引用
+// Unified root-level image paths, compatible with /images/ references in code
 app.use('/images', express.static(iteration3ImagesPath));
-// 兼容 PlayGame 等使用的 /images/Game Plants/...、/images/GIF/... 等路径
+// Compatible with PlayGame paths like /images/Game Plants/..., /images/GIF/... etc
 app.use('/images', express.static(iteration3NestedImagesPath));
 app.use('/images', express.static(iteration2ImagesPath));
 app.get('/iteration3', (req, res) => {
@@ -74,7 +74,7 @@ app.get(/^\/iteration3\/.*/, (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });
 
-// Iteration 1 静态文件和路由（位于上级目录）
+// Iteration 1 static files and routes (located in parent directory)
 const iteration1Path = path.join(__dirname, '..', 'iteration 1', 'dist');
 app.use('/iteration1', express.static(iteration1Path));
 app.get('/iteration1', (req, res) => {
@@ -84,7 +84,7 @@ app.get(/^\/iteration1\/.*/, (req, res) => {
   res.sendFile(path.join(iteration1Path, 'index.html'));
 });
 
-// 根路径 - 直接返回 iteration3 的首页，但不改变地址栏
+// Root path - directly serve iteration3 homepage without changing address bar
 app.get('/', (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });
@@ -126,7 +126,7 @@ app.get('/address/address.csv', (req, res) => {
   res.status(404).send('address csv not found');
 });
 
-// 健康检查
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });

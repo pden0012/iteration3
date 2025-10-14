@@ -20,7 +20,7 @@
     <!-- symptoms checklist section -->
     <section class="checklist-section">
       <div class="page-container">
-        <!-- 左侧：症状清单 | Left: checklist list -->
+        <!-- Left: checklist list -->
         <div class="left-column">
           <div class="checklist-panel">
             <div class="checklist-grid">
@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <!-- 右侧：提示卡片 | Right: tips card -->
+        <!-- Right: tips card -->
         <div class="right-column">
           <!-- simple advice -->
           <div class="advice-panel">
