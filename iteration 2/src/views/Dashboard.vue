@@ -95,18 +95,18 @@
         </div>
       </section>
 
-      <!-- seasons story section 放在原图表的位置 | show seasonal pollen story here -->
+      <!-- seasons story section - show seasonal pollen story here -->
       <section class="season-story">
         <div class="season-container">
-          <!-- 标题区：主标题 + 副标题 | header: big title + subtitle -->
+          <!-- header: big title + subtitle -->
           <header class="season-header">
             <h2 class="season-title">Melbourne’s Seasonal Pollen Story</h2>
             <p class="season-subtitle">Our city's changing seasons shape how pollen spreads. Understanding these shifts helps residents plan better and breathe easier.</p>
           </header>
 
-          <!-- 四季卡片 | four equal seasonal cards -->
+          <!-- four equal seasonal cards -->
           <div class="season-grid">
-            <!-- 春季 | Spring -->
+            <!-- Spring -->
             <article class="season-card">
               <div class="season-index">1</div>
               <h3 class="season-name">Spring</h3>
@@ -117,7 +117,7 @@
               <p class="season-note"><strong>Highest</strong> pollen spread, about 60% more than other seasons</p>
             </article>
 
-            <!-- 夏季 | Summer -->
+            <!-- Summer -->
             <article class="season-card">
               <div class="season-index">2</div>
               <h3 class="season-name">Summer</h3>
@@ -128,7 +128,7 @@
               <p class="season-note"><strong>Moderate</strong> pollen levels, around 40% dispersion</p>
             </article>
 
-            <!-- 秋季 | Fall -->
+            <!-- Fall -->
             <article class="season-card">
               <div class="season-index">3</div>
               <h3 class="season-name">Fall</h3>
@@ -139,7 +139,7 @@
               <p class="season-note"><strong>Lowest</strong> pollen spread, about 35%, offering natural relief</p>
             </article>
 
-            <!-- 冬季 | Winter -->
+            <!-- Winter -->
             <article class="season-card">
               <div class="season-index">4</div>
               <h3 class="season-name">Winter</h3>
@@ -861,7 +861,7 @@ export default {
 }
 
 
-/* 区域标题 - 不同区域的对齐方式 */
+/* Section titles - different alignment for different sections */
 .chart-section .section-title {
   text-align: center; /* chart title center aligned */
 }
@@ -1119,7 +1119,7 @@ export default {
 }
 
 
-/* 可视化小标题 */
+/* Visualization sub-titles */
 .viz-title {
   font-family: var(--font-body);
   font-size: 16px;

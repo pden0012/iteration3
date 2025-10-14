@@ -1,11 +1,11 @@
 <template>
   <div class="support-page">
-    <!-- 顶部横幅区域 -->
+    <!-- Top banner section -->
     <div class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">就近帮助，随时随地</h1>
+        <h1 class="hero-title">Nearby Help, Anytime Anywhere</h1>
         <p class="hero-description">
-          快速访问急救支持中心，为您连接附近的医疗帮助、药房和过敏护理服务。
+          Quick access to emergency support centers, connecting you to nearby medical help, pharmacies and allergy care services.
         </p>
       </div>
       <div class="hero-image">
@@ -16,18 +16,18 @@
       </div>
     </div>
 
-    <!-- 搜索和结果区域 -->
+    <!-- Search and results section -->
     <div class="search-section">
       <div class="search-container">
-        <h2 class="search-title">快速安全地搜索附近的医疗支持</h2>
+        <h2 class="search-title">Quickly and safely search for nearby medical support</h2>
         
-        <!-- 搜索框和筛选器 -->
+        <!-- Search box and filters -->
         <div class="search-controls">
           <div class="search-input-wrapper">
             <input 
               type="text" 
               v-model="searchQuery"
-              placeholder="搜索附近的服务"
+              placeholder="Search nearby services"
               class="search-input"
               @input="handleSearch"
             >
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <!-- 结果列表 -->
+        <!-- Results list -->
         <div class="results-container">
           <div 
             v-for="location in filteredLocations" 
@@ -58,13 +58,13 @@
               <p class="location-address">{{ location.address }} • {{ location.distance }}</p>
             </div>
             <button class="navigate-button" @click="navigate(location)">
-              导航
+              Navigate
             </button>
           </div>
 
-          <!-- 如果没有结果 -->
+          <!-- If no results -->
           <div v-if="filteredLocations.length === 0" class="no-results">
-            <p>未找到相关医疗机构</p>
+            <p>No relevant medical facilities found</p>
           </div>
         </div>
       </div>
@@ -80,9 +80,9 @@ export default {
       searchQuery: '',
       activeFilter: 'all',
       filters: [
-        { id: 'all', label: '全部' },
-        { id: 'hospitals', label: '医院' },
-        { id: 'clinics', label: '诊所' }
+        { id: 'all', label: 'All' },
+        { id: 'hospitals', label: 'Hospitals' },
+        { id: 'clinics', label: 'Clinics' }
       ],
       locations: [
         {
@@ -113,7 +113,7 @@ export default {
     filteredLocations() {
       let results = this.locations;
       
-      // 按类型筛选
+      // Filter by type
       if (this.activeFilter !== 'all') {
         results = results.filter(loc => {
           if (this.activeFilter === 'hospitals') return loc.type === 'hospital';
@@ -122,7 +122,7 @@ export default {
         });
       }
       
-      // 按搜索关键词筛选
+      // Filter by search keywords
       if (this.searchQuery.trim()) {
         const query = this.searchQuery.toLowerCase();
         results = results.filter(loc => 
@@ -136,13 +136,13 @@ export default {
   },
   methods: {
     handleSearch() {
-      // 搜索处理逻辑
+      // Search handling logic
     },
     setFilter(filterId) {
       this.activeFilter = filterId;
     },
     navigate(location) {
-      // 导航到地图或外部导航应用
+      // Navigate to map or external navigation app
       const address = encodeURIComponent(`${location.address}, Melbourne, Australia`);
       window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
     }
@@ -159,7 +159,7 @@ export default {
   background: linear-gradient(180deg, #4678A8 0%, rgba(70, 120, 168, 0.5) 36.55%, rgba(255, 255, 255, 0.5) 100%);
 }
 
-/* 顶部横幅区域 */
+/* Top banner section */
 .hero-section {
   display: flex;
   flex-direction: row;
@@ -226,7 +226,7 @@ export default {
   font-size: 60px;
 }
 
-/* 搜索区域 */
+/* Search section */
 .search-section {
   display: flex;
   justify-content: center;
@@ -259,7 +259,7 @@ export default {
   margin: 0 0 40px 0;
 }
 
-/* 搜索控件 */
+/* Search controls */
 .search-controls {
   display: flex;
   flex-direction: column;
@@ -310,7 +310,7 @@ export default {
   pointer-events: none;
 }
 
-/* 筛选chips */
+/* Filter chips */
 .filter-chips {
   display: flex;
   flex-direction: row;
@@ -351,7 +351,7 @@ export default {
   color: #4A4459;
 }
 
-/* 结果容器 */
+/* Results container */
 .results-container {
   display: flex;
   flex-direction: column;
@@ -363,7 +363,7 @@ export default {
   padding-right: 8px;
 }
 
-/* 自定义滚动条 */
+/* Custom scrollbar */
 .results-container::-webkit-scrollbar {
   width: 15px;
 }
@@ -381,7 +381,7 @@ export default {
   background: #B3B3B3;
 }
 
-/* 位置卡片 */
+/* Location card */
 .location-card {
   box-sizing: border-box;
   display: flex;
@@ -454,7 +454,7 @@ export default {
   transform: scale(0.98);
 }
 
-/* 无结果提示 */
+/* No results message */
 .no-results {
   display: flex;
   justify-content: center;
@@ -469,7 +469,7 @@ export default {
   color: #565656;
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 1024px) {
   .hero-section {
     padding: 40px 60px;

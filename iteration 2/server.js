@@ -23,7 +23,7 @@ app.use(cors({
     'https://iteration-web.onrender.com',
     'https://www.hayfree.space',
     'https://hayfree.space',
-    'https://*.onrender.com' // 允许所有Render域名
+    'https://*.onrender.com' // Allow all Render domains
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
