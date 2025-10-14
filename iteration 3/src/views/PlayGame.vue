@@ -280,7 +280,10 @@ export default {
   width: 100%;
   height: 425px;
   padding: 40px 20px;
-  background: linear-gradient(rgba(35, 167, 119, 0.5), rgba(35, 167, 119, 0.8)), url('/images/game epic header.webp');
+  background: 
+    linear-gradient(rgba(35, 155, 167, 0.65), rgba(35, 155, 167, 0.65)),
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url('/images/game epic header.webp');
   background-size: cover;
   background-position: center 20%;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -292,7 +295,7 @@ export default {
   font-family: 'Questrial', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 80px;
+  font-size: 64px;
   line-height: 100%;
   display: flex;
   align-items: center;
@@ -306,7 +309,7 @@ export default {
   font-family: 'AR One Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 100%;
   display: flex;
   align-items: center;
@@ -445,6 +448,8 @@ export default {
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   height: 650px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Plant Panel */

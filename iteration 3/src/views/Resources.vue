@@ -137,8 +137,6 @@
 
     <!-- did you know section - educational content -->
     <section class="knowledge-section">
-      <!-- top separator bar -->
-      <div class="separator-bar"></div>
       <div class="page-container">
         <div class="knowledge-content">
           <h2 class="knowledge-title">{{ knowledgeData.title }}</h2>

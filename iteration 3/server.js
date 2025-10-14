@@ -67,6 +67,9 @@ app.use('/images', express.static(iteration3ImagesPath));
 // Compatible with PlayGame paths like /images/Game Plants/..., /images/GIF/... etc
 app.use('/images', express.static(iteration3NestedImagesPath));
 app.use('/images', express.static(iteration2ImagesPath));
+// Main directory images (for image.png and other main images)
+const mainImagesPath = path.join(__dirname, '..', 'images');
+app.use('/images', express.static(mainImagesPath));
 app.get('/iteration3', (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });

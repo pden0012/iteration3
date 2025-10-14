@@ -2,7 +2,7 @@
   <div class="image-page">
     <!-- big page title shown at the top -->
     <div class="page-header">
-      <h1 class="page-title">Plant Hayfever Risk Identifier</h1>
+      <h1 class="page-title">Breathe Easy with AI: Identify Hay Fever Plants That Cause Allergies</h1>
     </div>
     <div class="image-grid">
       <!-- left side: upload -->
@@ -441,13 +441,14 @@ export default {
 
 
 .page-title {
-  margin: 0 0 8px 0;
+  margin: 0 auto 8px auto;
   font-family: var(--font-heading, 'Questrial', sans-serif);
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 400;
   text-align: center;
   line-height: 1.2;
   color: #1b3a2a;
+  max-width: 1000px; /* limit title width to make it narrower */
 }
 
 .image-grid {

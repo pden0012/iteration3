@@ -8,9 +8,6 @@
           A quick-access hub for emergency support, connecting you to nearby medical help and allergy care.
         </p>
       </div>
-      <div class="hero-image">
-        <img src="/images/10011760143647_.pic.jpg" alt="Medical Support Illustration" class="hero-illustration">
-      </div>
     </div>
 
     <!-- Search and Results Section -->
@@ -329,32 +326,41 @@ export default {
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, 
-    #4678A8 0%, 
-    #4678A8 40%, 
-    #6b9bc2 50%, 
-    #8fb3d5 60%, 
-    #b8d3e8 70%, 
-    #d9e8f5 80%, 
-    #f0f6fb 100%);
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 255, 255, 0.6) 0%, 
+    rgba(35, 155, 167, 0.4) 60%, 
+    rgba(35, 155, 167, 0.7) 80%, 
+    #239BA7 100%);
 }
 
 /* Hero Section */
 .hero-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 112px;
-  background: #4678A8;
-  min-height: 374px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 425px;
+  padding: 40px 20px;
+  background: 
+    linear-gradient(rgba(35, 155, 167, 0.7), rgba(35, 155, 167, 0.7)),
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url('/images/image.png');
+  background-size: cover;
+  background-position: center 20%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  color: white;
 }
 
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 805px;
+  gap: 20px;
+  max-width: 1100px;
+  text-align: center;
 }
 
 .hero-title {
@@ -364,17 +370,19 @@ export default {
   font-size: 64px;
   line-height: 100%;
   color: #FFFFFF;
-  margin: 0;
+  margin: 0 0 20px 0;
+  max-width: 1100px;
 }
 
 .hero-description {
   font-family: 'AR One Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 100%;
   color: #FFFFFF;
-  margin: 0;
+  max-width: 970px;
+  margin: 0 auto;
 }
 
 .hero-image {
@@ -454,7 +462,7 @@ export default {
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: #4678A8;
+  background: #239BA7;
   border: none;
   border-radius: 8px;
   display: flex;
@@ -475,13 +483,13 @@ export default {
 
 .search-button:hover:not(:disabled),
 .location-target-button:hover:not(:disabled) {
-  background: #3a6590;
+  background: #1e7a85;
   transform: translateY(-50%) scale(1.1);
 }
 
 .search-button:disabled,
 .location-target-button:disabled {
-  background: #9ab3c9;
+  background: #7fb3b8;
   cursor: not-allowed;
   opacity: 0.7;
 }
@@ -618,12 +626,12 @@ export default {
 }
 
 .chip:hover {
-  background: rgba(70, 120, 168, 0.1);
+  background: rgba(35, 155, 167, 0.1);
 }
 
 .chip.active {
-  background: rgba(70, 120, 168, 0.2);
-  border-color: #4678A8;
+  background: rgba(35, 155, 167, 0.2);
+  border-color: #239BA7;
   color: #4A4459;
 }
 
@@ -709,7 +717,7 @@ export default {
 .navigate-button {
   box-sizing: border-box;
   padding: 12px 24px;
-  background: #4678A8;
+  background: #239BA7;
   border: none;
   border-radius: 8px;
   font-family: 'Roboto', sans-serif;
@@ -722,7 +730,7 @@ export default {
 }
 
 .navigate-button:hover {
-  background: #3a6590;
+  background: #1e7a85;
   transform: scale(1.05);
 }
 

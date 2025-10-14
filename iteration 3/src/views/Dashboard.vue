@@ -20,6 +20,7 @@
                 @keydown.enter.prevent="confirmFirstSuggestion"
                 type="text"
                 class="location-input"
+                :class="{ 'error': showLocationError }"
                 placeholder="Search suburb"
                 autocomplete="off"
               />
@@ -31,6 +32,11 @@
                   class="suggestion-item"
                 >{{ addr }}</li>
               </ul>
+              <!-- error message display -->
+              <div v-if="showLocationError" class="error-message">
+                <span class="error-icon">⚠️</span>
+                <span class="error-text">{{ locationError }}</span>
+              </div>
             </div>
             <button class="confirm-button" @click="confirmLocation">Confirm</button>
           </div>
@@ -265,7 +271,10 @@ export default {
       alertVariant: 'normal', // alert style normal(yellow) / danger(red)
       pollenProgress: 25, 
       chartRingColor: '#C8E6C9', 
-      chartTextColor: '#1E1E1E'
+      chartTextColor: '#1E1E1E',
+      // error state for location validation
+      locationError: '', // stores error message for invalid location input
+      showLocationError: false // controls visibility of error message
     }
   },
   
@@ -319,6 +328,9 @@ export default {
     onQueryChange() {
       this.filteredAddresses = this.filterByQuery(this.locationQuery);
       this.showSuggestions = true;
+      // clear error when user starts typing
+      this.showLocationError = false;
+      this.locationError = '';
     },
     
     // this method handles when user focuses on the location input
@@ -360,6 +372,9 @@ export default {
     selectAddress(addr) {
       this.locationQuery = addr;
       this.showSuggestions = false;
+      // clear error when user selects a valid address
+      this.showLocationError = false;
+      this.locationError = '';
     },
 
     // this method handles when user clicks the Confirm button for location
@@ -368,6 +383,10 @@ export default {
     // this method validates location and loads dashboard data
     // returns: nothing; prefers exact match, falls back to first suggestion
     confirmLocation() {
+      // clear any previous error
+      this.showLocationError = false;
+      this.locationError = '';
+      
       // try to find exact match in address list
       const match = this.addressList.find(a => a.toLowerCase() === this.locationQuery.toLowerCase());
       if (match) {
@@ -382,6 +401,10 @@ export default {
           this.locationQuery = this.selectedLocation;
           this.loadDataForLocation(this.selectedLocation);
           this.updateLastUpdated();
+        } else {
+          // no suggestions available, show error
+          this.showLocationError = true;
+          this.locationError = 'Please select a valid address from the suggestions list.';
         }
       }
     },
@@ -802,6 +825,44 @@ export default {
 .location-input:focus {
   border-color: #239BA7;            /* teal border */
   box-shadow: 0 0 0 2px rgba(35, 155, 167, 0.2);
+}
+
+/* error state: red border and shadow */
+.location-input.error {
+  border-color: #F44336;            /* red border */
+  box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+}
+
+/* error message container */
+.error-message {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #FFEBEE;
+  border: 1px solid #F44336;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15);
+}
+
+/* error icon */
+.error-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* error text */
+.error-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #C62828;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 
