@@ -110,6 +110,22 @@ app.get(['/municipal-boundary.csv', '/municipal_boundary.csv'], (req, res) => {
   res.status(404).send('municipal boundary csv not found');
 });
 
+// Address CSV for dashboard search suggestions - serve from main directory
+const addressCandidates = [
+  path.join(__dirname, '..', 'address', 'address.csv'),
+  path.join(iteration3Path, 'address', 'address.csv'),
+  path.join(iteration2Path, 'address', 'address.csv'),
+  path.join(__dirname, 'address', 'address.csv')
+];
+app.get('/address/address.csv', (req, res) => {
+  for (const candidate of addressCandidates) {
+    if (fs.existsSync(candidate)) {
+      return res.sendFile(candidate);
+    }
+  }
+  res.status(404).send('address csv not found');
+});
+
 // 健康检查
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
