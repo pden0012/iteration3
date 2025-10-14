@@ -418,7 +418,7 @@ export default {
 }
 
 
-/* 文章内容响应式设计 */
+/* Article content responsive design */
 @media (max-width: 768px) {
   .article-content-container {
     grid-template-columns: 1fr;
@@ -431,7 +431,7 @@ export default {
 }
 
 
-/* 文章底部 */
+/* Article footer */
 .article-footer {
   width: 100%;
   text-align: center;
@@ -439,7 +439,7 @@ export default {
 }
 
 
-/* 文章来源链接 */
+/* Article source link */
 .article-source {
   font-family: var(--font-body);
   font-size: 14px;
@@ -459,7 +459,7 @@ export default {
 
 
 
-/* 视频详情页面 - 全屏视频观看 */
+/* Video detail page - full screen video viewing */
 .video-detail-page {
   background: var(--background-white);
   min-height: calc(100vh - 105px);
@@ -476,7 +476,7 @@ export default {
 }
 
 
-/* 返回按钮 - 导航返回资源页面 */
+/* Back button - navigate back to resources page */
 .back-button {
   background: transparent;
   border: none;
@@ -497,7 +497,7 @@ export default {
 }
 
 
-/* 视频标题 - 视频的主标题 */
+/* Video title - main title of the video */
 .video-title {
   font-family: var(--font-heading);
   font-size: clamp(28px, 4vw, 42px);
@@ -541,13 +541,13 @@ export default {
 }
 
 
-/* 视频信息区域 */
+/* Video info area */
 .video-info {
   max-width: 800px;
 }
 
 
-/* 视频作者信息 */
+/* Video author info */
 .video-author {
   font-family: var(--font-body);
   font-size: 14px;
@@ -559,7 +559,7 @@ export default {
 }
 
 
-/* 视频描述文本 */
+/* Video description text */
 .video-description {
   font-family: var(--font-content);
   font-size: 16px;
@@ -617,7 +617,7 @@ export default {
 }
 
 
-/* 卡片区域 - 资源卡片网格 */
+/* Cards section - resource cards grid */
 .cards-section {
   background: var(--background-white);
   padding: 20px 0 60px;
@@ -626,7 +626,7 @@ export default {
 }
 
 
-/* 卡片网格布局 */
+/* Cards grid layout */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -634,7 +634,7 @@ export default {
 }
 
 
-/* 单个资源卡片 */
+/* Individual resource card */
 .resource-card {
   background: var(--background-white);
   border-radius: 6px;
@@ -645,14 +645,14 @@ export default {
 }
 
 
-/* 卡片悬停效果 */
+/* Card hover effect */
 .resource-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 
-/* 卡片图片容器 */
+/* Card image container */
 .card-image {
   width: 100%;
   height: 190px;
@@ -664,7 +664,7 @@ export default {
 }
 
 
-/* 卡片图片样式 */
+/* Card image styles */
 .card-image img {
   width: 100%;
   height: 100%;
@@ -672,7 +672,7 @@ export default {
 }
 
 
-/* 卡片内容区域 */
+/* Card content area */
 .card-content {
   padding: 16px 18px 24px;
   display: flex;
@@ -681,7 +681,7 @@ export default {
 }
 
 
-/* 卡片类型标签 */
+/* Card type label */
 .card-type {
   font-family: var(--font-body);
   font-size: 12px;
@@ -693,7 +693,7 @@ export default {
 }
 
 
-/* 卡片标题 */
+/* Card title */
 .card-title {
   font-family: var(--font-body);
   font-size: 18px;
@@ -707,7 +707,7 @@ export default {
 }
 
 
-/* 卡片操作按钮 */
+/* Card action button */
 .card-button {
   background: transparent;
   border: none;
@@ -725,14 +725,14 @@ export default {
 }
 
 
-/* 卡片按钮悬停效果 - 现在由父卡片处理 */
+/* Card button hover effect - now handled by parent card */
 .resource-card:hover .card-button {
   text-decoration: underline;
   color: #1a7a84;
 }
 
 
-/* 区域间分隔条 */
+/* Separator bar between sections */
 .separator-bar {
   width: 100%;
   height: 8px;
@@ -741,14 +741,14 @@ export default {
 }
 
 
-/* 知识区域 - 教育内容 */
+/* Knowledge section - educational content */
 .knowledge-section {
   background: var(--background-off-white);
   padding: 0 0 48px;
 }
 
 
-/* 知识内容包装器 */
+/* Knowledge content wrapper */
 .knowledge-content {
   max-width: 1160px;
   margin: 0 auto;
@@ -760,7 +760,7 @@ export default {
 }
 
 
-/* 知识区域标题 */
+/* Knowledge section title */
 .knowledge-title {
   font-family: var(--font-heading);
   font-size: clamp(24px, 3vw, 32px);
@@ -771,7 +771,7 @@ export default {
 }
 
 
-/* 知识区域文本 */
+/* Knowledge section text */
 .knowledge-text {
   font-family: var(--font-content);
   font-size: clamp(16px, 2vw, 20px);
@@ -783,7 +783,7 @@ export default {
 }
 
 
-/* 知识区域按钮 */
+/* Knowledge section button */
 .knowledge-button {
   background: #F9D65C !important;
   border: 1px solid #F9D65C;
@@ -799,7 +799,7 @@ export default {
 }
 
 
-/* 知识按钮悬停效果 */
+/* Knowledge button hover effect */
 .knowledge-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -952,7 +952,7 @@ export default {
 }
 
 
-/* 视频详情响应式设计 */
+/* Video detail responsive design */
 @media (max-width: 767px) {
   .video-detail-page {
     padding: 20px 0;
@@ -974,7 +974,7 @@ export default {
 }
 
 
-/* 缺失图片的占位符样式 */
+/* Placeholder styles for missing images */
 .card-image::before {
   content: '📖';
   font-size: 48px;
@@ -986,7 +986,7 @@ export default {
 }
 
 
-/* 图片加载后隐藏占位符 */
+/* Hide placeholder after image loads */
 .card-image:has(img) {
   background: transparent;
 }

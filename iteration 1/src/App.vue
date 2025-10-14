@@ -87,20 +87,20 @@ export default {
     },
     
     // Navigate to symptoms page from resources
-    // 从资源页面导航到症状页面
+    // Navigate to symptoms page from resources
     navigateToSymptoms() {
       this.currentView = 'symptoms';
       this.activeItem = 'resources'; // Keep resources highlighted in nav
       window.location.hash = '#symptoms';
     },
     onHomeFeatureButton(id) {
-      // Hero CTA 或 "View Dashboard/Visit Resources"等按钮点击回调
+      // Hero CTA or "View Dashboard/Visit Resources" button click callback
       if (id === 'tracker') {
         this.currentView = 'dashboard';
         this.activeItem = 'dashboard';
         window.location.hash = '#dashboard';
       } else if (id === 'education') {
-        // 如果未来需要跳转到资源
+        // If need to jump to resources in the future
         this.currentView = 'resources';
         this.activeItem = 'resources';
         window.location.hash = '#resources';
@@ -179,7 +179,7 @@ export default {
 }
 
 /* Website logo container */
-/* 网站logo容器 - 导航栏左上角的logo区域 */
+/* Website logo container - logo area in top left of navigation bar */
 .logo {
   display: flex;
   align-items: center;
@@ -187,10 +187,10 @@ export default {
 }
 
 /* Logo image styling */
-/* Logo图片样式 - 实际的logo图片显示
-   - height: 120px logo高度120像素(原60px的两倍)
-   - width: auto 宽度自动适应，保持图片比例
-   - object-fit: contain 图片完整显示，保持原始比例 */
+/* Logo image styling - actual logo image display
+   - height: 120px logo height 120 pixels (double the original 60px)
+   - width: auto width auto-adapts, maintains image ratio
+   - object-fit: contain image displays completely, maintains original ratio */
 .logo-image {
   height: 200px;
   width: auto;
@@ -255,14 +255,14 @@ export default {
 }
 
 /* Coming Soon page styling */
-/* Coming Soon页面样式
-   - display: flex 弹性布局
-   - flex-direction: column 垂直排列
-   - align-items: center 水平居中
-   - justify-content: center 垂直居中
-   - min-height: 60vh 最小高度为视口高度的60%
-   - text-align: center 文本居中
-   - padding: 40px 内边距40像素 */
+/* Coming Soon page styling
+   - display: flex flexible layout
+   - flex-direction: column vertical arrangement
+   - align-items: center horizontal center
+   - justify-content: center vertical center
+   - min-height: 60vh minimum height 60% of viewport height
+   - text-align: center text center
+   - padding: 40px inner padding 40 pixels */
 .coming-soon {
   display: flex;
   flex-direction: column;
@@ -274,11 +274,11 @@ export default {
 }
 
 /* Coming Soon title */
-/* Coming Soon标题
-   - font-family: 'Questrial', sans-serif 使用Questrial字体
-   - font-size: 48px 字体大小48像素
-   - color: #239BA7 使用主要品牌颜色
-   - margin: 0 0 16px 底部外边距16像素 */
+/* Coming Soon title
+   - font-family: 'Questrial', sans-serif use Questrial font
+   - font-size: 48px font size 48 pixels
+   - color: #239BA7 use main brand color
+   - margin: 0 0 16px bottom margin 16 pixels */
 .coming-soon h2 {
   font-family: 'Questrial', sans-serif;
   font-size: 48px;
@@ -287,11 +287,11 @@ export default {
 }
 
 /* Coming Soon description */
-/* Coming Soon描述
-   - font-family: 'Inter', sans-serif 使用Inter字体
-   - font-size: 18px 字体大小18像素
-   - color: #666 灰色文本
-   - margin: 0 无外边距 */
+/* Coming Soon description
+   - font-family: 'Inter', sans-serif use Inter font
+   - font-size: 18px font size 18 pixels
+   - color: #666 gray text
+   - margin: 0 no margin */
 .coming-soon p {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
