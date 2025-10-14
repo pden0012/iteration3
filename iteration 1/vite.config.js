@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       open: true,
       proxy: {
-        // 本地开发代理，解决 CORS。前端请求 /api/* 会被转发到后端。
+        // Local development proxy to solve CORS. Frontend requests /api/* will be forwarded to backend.
         '/api': {
           target: apiTarget,
           changeOrigin: true,

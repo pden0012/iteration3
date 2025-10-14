@@ -360,7 +360,7 @@ export default {
 /* Features grid - professional 3+3 layout */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3列网格，每列等宽 */
+  grid-template-columns: repeat(3, 1fr); /* 3-column grid, equal width per column */
   grid-template-rows: auto auto;
   gap: 30px;
   justify-items: center;
@@ -531,8 +531,8 @@ export default {
   padding: 80px 0;
 }
 
-/* 信息内容容器 - 文字内容的直接容器
-   - text-align: center 文字居中对齐 */
+/* Info content container - direct container for text content
+   - text-align: center for centered text alignment */
 .info-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -606,7 +606,7 @@ export default {
 }
 
 /* Responsive Design */
-/* 大屏幕响应式设计 - 1440px及以上屏幕 */
+/* Large screen responsive design - 1440px and above */
 @media (min-width: 1440px) {
   /* Large screens - increase page container padding */
   /* large screens - increase page container paddings */
