@@ -1,4 +1,4 @@
-// 部署服务器 - 用于 hayfree.space
+// Deployment server for hayfree.space
 const express = require('express');
 const cors = require('cors');
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -35,7 +35,7 @@ app.use('/api', createProxyMiddleware({
   }
 }));
 
-// Iteration 2 静态文件和路由
+// Iteration 2 static files and routes
 const iteration2Path = path.join(__dirname, 'iteration 2', 'dist');
 const iteration2ImagesPath = path.join(__dirname, 'iteration 2', 'images');
 app.use('/iteration2', express.static(iteration2Path));
@@ -44,7 +44,7 @@ app.get(/^\/iteration2\/.*/, (req, res) => {
   res.sendFile(path.join(iteration2Path, 'index.html'));
 });
 
-// Iteration 3 静态文件和路由
+// Iteration 3 static files and routes
 const iteration3Path = path.join(__dirname, 'iteration 3', 'dist');
 const iteration3ImagesPath = path.join(__dirname, 'iteration 3', 'images');
 app.use('/iteration3', express.static(iteration3Path));
@@ -53,12 +53,12 @@ app.get(/^\/iteration3\/.*/, (req, res) => {
   res.sendFile(path.join(iteration3Path, 'index.html'));
 });
 
-// 根路径 - 可以重定向到默认的 iteration
+// Root path - can redirect to default iteration
 app.get('/', (req, res) => {
-  res.redirect('/iteration3');  // 或者显示一个选择页面
+  res.redirect('/iteration3');  // or show a selection page
 });
 
-// 健康检查
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
