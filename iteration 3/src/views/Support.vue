@@ -142,7 +142,7 @@ export default {
   },
   mounted() {
     this.getUserLocation();
-    // 点击外部关闭建议框
+    // Click outside to close suggestions
     document.addEventListener('click', this.handleClickOutside);
   },
   beforeUnmount() {
@@ -174,10 +174,10 @@ export default {
     },
     // Debounced search to the Nominatim API for address text input.
     async handleLocationSearch() {
-      // 用户输入时，标记为无效位置
+      // Mark as invalid location when user types
       this.hasValidLocation = false;
       
-      // 防抖处理，避免频繁请求
+      // Debounce to avoid frequent requests
       if (this.searchTimeout) {
         clearTimeout(this.searchTimeout);
       }
@@ -189,7 +189,7 @@ export default {
       
       this.searchTimeout = setTimeout(async () => {
         try {
-          // 使用OpenStreetMap Nominatim API进行地址搜索（限制在墨尔本区域）
+          // Use OpenStreetMap Nominatim API for address search (limited to Melbourne area)
           const response = await fetch(
             `https://nominatim.openstreetmap.org/search?` +
             `q=${encodeURIComponent(this.locationSearch)},Melbourne,Victoria,Australia` +
@@ -208,7 +208,7 @@ export default {
           console.error('Address search failed:', error);
           this.locationSuggestions = [];
         }
-      }, 300); // 300ms防抖延迟
+      }, 300); // 300ms debounce delay
     },
     // User clicks one of the suggestions → lock coordinates + close list
     selectLocation(suggestion) {
@@ -226,13 +226,13 @@ export default {
         return;
       }
       
-      // 如果用户没有选择有效地址，传null坐标让后端返回空结果
+      // If user hasn't selected valid address, pass null coordinates for empty result
       if (!this.hasValidLocation) {
         this.userLatitude = null;
         this.userLongitude = null;
       }
       
-      // 直接调用API，让后端处理
+      // Call API directly, let backend handle it
       this.fetchFacilities();
     },
     // Shortcut: ask the browser for current position and search immediately.
@@ -251,7 +251,7 @@ export default {
             this.fetchFacilities();
           },
           (error) => {
-            console.error('定位失败:', error);
+            console.error('Location failed:', error);
             alert('Unable to get your location. Please check browser permissions.');
             this.gettingLocation = false;
           }
@@ -263,7 +263,7 @@ export default {
     },
     // Tiny UX: click outside the wrapper to close suggestions.
     handleClickOutside(event) {
-      // 检查点击是否在搜索框外部
+      // Check if click is outside search box
       const searchWrapper = event.target.closest('.service-search-wrapper');
       if (!searchWrapper) {
         this.showSuggestions = false;
@@ -275,7 +275,7 @@ export default {
       this.error = null;
       
       try {
-        // 如果坐标为空，传null或者空字符串
+        // If coordinates are empty, pass null or empty string
         const lat = this.userLatitude !== null ? this.userLatitude : '';
         const lng = this.userLongitude !== null ? this.userLongitude : '';
         
@@ -286,7 +286,7 @@ export default {
         const result = await response.json();
         
         if (result.code === 1 && result.data) {
-          // 转换API数据格式为组件需要的格式
+          // Convert API data format to component required format
           this.locations = result.data.map((item, index) => ({
             id: index + 1,
             name: item.name,
@@ -309,12 +309,12 @@ export default {
     // Change active filter and refresh results.
     setFilter(filterId) {
       this.activeFilter = filterId;
-      // 切换过滤器时重新获取数据
+      // Refetch data when switching filters
       this.fetchFacilities();
     },
     // Open Google Maps in a new tab with the address.
     navigate(location) {
-      // 导航到地图或外部导航应用
+      // Navigate to map or external navigation app
       const address = encodeURIComponent(`${location.address}, Melbourne, Australia`);
       window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
     }
@@ -390,7 +390,7 @@ export default {
   margin-left: 40px;
 }
 
-/* 搜索区域 */
+/* Search section */
 .search-section {
   display: flex;
   justify-content: center;
@@ -627,7 +627,7 @@ export default {
   color: #4A4459;
 }
 
-/* 结果容器 */
+/* Results container */
 .results-container {
   display: flex;
   flex-direction: column;
@@ -639,7 +639,7 @@ export default {
   padding-right: 8px;
 }
 
-/* 自定义滚动条 */
+/* Custom scrollbar */
 .results-container::-webkit-scrollbar {
   width: 15px;
 }
@@ -657,7 +657,7 @@ export default {
   background: #B3B3B3;
 }
 
-/* 位置卡片 */
+/* Location card */
 .location-card {
   box-sizing: border-box;
   display: flex;
@@ -730,7 +730,7 @@ export default {
   transform: scale(0.98);
 }
 
-/* 无结果提示 */
+/* No results message */
 .no-results {
   display: flex;
   justify-content: center;
@@ -745,7 +745,7 @@ export default {
   color: #565656;
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 1024px) {
   .hero-section {
     padding: 40px 60px;

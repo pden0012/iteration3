@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Simple proxy test script for debugging Render deployment
-// 简单的代理测试脚本，用于调试Render部署
+// Simple proxy test script for debugging Render deployment
 
 const http = require('http');
 

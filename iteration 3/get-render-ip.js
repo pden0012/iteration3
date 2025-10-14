@@ -2,7 +2,7 @@
 
 /**
  * Script to get Render deployment IP information
- * 获取Render部署的IP信息
+ * Get Render deployment IP information
  */
 
 const http = require('http');

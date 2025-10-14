@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Render deployment diagnosis script
-// Render部署诊断脚本
+// Render deployment diagnosis script
 
 const http = require('http');
 

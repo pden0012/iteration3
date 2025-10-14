@@ -2,7 +2,7 @@
 
 /**
  * Build verification script for Render deployment
- * 构建验证脚本，用于Render部署
+ * Build verification script for Render deployment
  */
 
 const fs = require('fs');

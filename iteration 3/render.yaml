@@ -1,5 +1,5 @@
 # Render deployment configuration for Multi-Iteration
-# Render多版本部署配置
+# Multi-version deployment configuration
 
 services:
   - type: web

@@ -4,8 +4,8 @@
  * Build and Deploy Script for Hay Fever Management Website
  * This script ensures proper build process and deployment preparation
  * 
- * 花粉过敏管理网站构建和部署脚本
- * 此脚本确保正确的构建过程和部署准备
+ * Hay fever management website build and deployment script
+ * This script ensures proper build process and deployment preparation
  */
 
 const fs = require('fs');
