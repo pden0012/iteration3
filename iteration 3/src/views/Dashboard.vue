@@ -106,7 +106,7 @@
         <div class="season-container">
           <!-- header: big title + subtitle -->
           <header class="season-header">
-            <h2 class="season-title">Melbourne’s Seasonal Pollen Story</h2>
+            <h2 class="season-title">Victoria's Seasonal Pollen Story</h2>
             <p class="season-subtitle">Our city's changing seasons shape how pollen spreads. Understanding these shifts helps residents plan better and breathe easier.</p>
           </header>
 
@@ -609,10 +609,10 @@ export default {
     advisoryForLevel(level) {
       const l = (level || '').toLowerCase();
       if (l.includes('very low')) return { message: 'Great day to enjoy the outdoors!', variant: 'normal' };
-      if (l === 'low') return { message: 'Good conditions — outdoor activities are fine.', variant: 'normal' };
-      if (l === 'moderate') return { message: 'Moderate — consider a mask if you are sensitive.', variant: 'normal' };
-      if (l === 'high') return { message: 'High levels — limit outdoor time and keep meds handy.', variant: 'danger' };
-      if (l === 'very high') return { message: 'Very high — stay indoors if possible and close windows.', variant: 'danger' };
+      if (l === 'low') return { message: 'Good conditions outdoor activities are fine', variant: 'normal' };
+      if (l === 'moderate') return { message: 'Moderate consider a mask if you are sensitive.', variant: 'normal' };
+      if (l === 'high') return { message: 'High levels limit outdoor time and keep meds handy.', variant: 'danger' };
+      if (l === 'very high') return { message: 'Very high stay indoors if possible and close windows.', variant: 'danger' };
       return { message: 'Great day to enjoy the outdoors!', variant: 'normal' };
     }
   },
@@ -1101,7 +1101,7 @@ export default {
   width: 100vw; /* Extend to full viewport width */
   margin-left: calc(50% - 50vw); /* Pull element to the left edge of the viewport */
   margin-right: calc(50% - 50vw); /* Pull element to the right edge of the viewport */
-  background: #3E79A6; /* blue background similar to screenshot */
+  background: #239BA7; /* teal background */
   color: #FFFFFF;
   border-radius: 0px;
   margin-top: 20px; /* Keep the top margin */

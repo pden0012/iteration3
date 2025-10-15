@@ -63,9 +63,8 @@
         <div class="chart-text-content">
           <h2 class="chart-title">Top 5 Tree Families Causing Hay Fever in Melbourne</h2>
           <p class="chart-description">
-            This chart shows the top five tree families that release the most pollen in Melbourne, 
-            often triggering hay fever symptoms. It helps users understand which trees are the 
-            main allergy sources in their surroundings.
+            Melbourne’s Urban Forest Strategy (2012–2024) promotes native, climate-resilient trees like Eucalyptus from the Myrtaceae family to enhance canopy cover and biodiversity.
+Their ability to thrive in heat, pollution and compacted soils makes them common across the city and make Myrtaceae valuable for ecology and a key pollen source for hay fever in Melbourne.
           </p>
         </div>
         

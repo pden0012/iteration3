@@ -64,7 +64,7 @@
             </span>
           </div>
           <!-- removed scientific name line -->
-          <p class="card-confidence" v-if="!result.isLoading">Confidence Level: {{ idx + 1 }}</p>
+          <p class="card-confidence" v-if="!result.isLoading">{{ ['Strong match', 'Good match', 'Weak match'][idx] }}</p>
           <p class="card-confidence" v-else>
             <span class="loading-dots">Analyzing</span>
           </p>
